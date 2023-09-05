@@ -1,3 +1,6 @@
+/**
+ * FileHelper Obj
+ */
 const FileHelper = {
   fileContent: null,
   chapterList: [],
