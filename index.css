@@ -1,0 +1,80 @@
+html {
+  background-color: rgb(235, 230, 218);
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.page {
+  width: 800px;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.opts {
+  flex: 0;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  background-color: #f5f1e8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.footer {
+  flex: 0;
+  padding: 12px 20px;
+  background-color: #f5f1e8;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  color: rgba(0, 0, 0, 0.5);
+}
+.opts-right > * {
+  margin-left: 4px;
+}
+.chapter {
+  flex: 1;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAQAAABLCVATAAAAAXNSR0IArs4c6QAAAWlJREFUeNqlloFtwzAMBFU0PxF34k5eoUtktBZVnBysixEEUWBD+idpUnrTGXNkhPvt18awXZjKyE5BE5ix8sw6IEQHfKA1kZoMF5ZNnndqy1k2vae+wTAjMBPIp+sY3QJP1JADaXtvFjv4LR1TFKA5GD4suFSQcGEhjPWRn2+zKpRLT0hBwSo3lRerdpScpbMQCgZS2cH4tHQwerJVPIQjUVBH9wFTPOMgxnRwObhWLLkKlpaJA8TnpDxBwEv1r8Uo+ImegDVX4DBXKKWt3mQnZRRMlxZ7vfxDra6j0vD8vKUtKvJ79Pt1X9W6XxZNTvphhYxcGEjneWncGVH3pM2kAs6Qlq4XDIus4x2qDKieYEsz0nTAYd96MelYZEEgElZxnJtEa4mefZpr7hHGsLLmS2uDVgPGEUadgBxwrn3zwRwGhkU2NVqy6fUEbRs1CruoCM5zlPaIIL6/biLs0edft/d7IfjhT9gfL6wnSxDYPyIAAAAASUVORK5CYII=);
+  background-attachment: scroll;
+  background-color: #f5f1e8;
+  position: relative;
+  overflow-y: scroll;
+}
+.chapter-container {
+  padding: 64px;
+  position: absolute;
+}
+#chapter-title {
+  font-family: "SourceHanSansSC-Medium", "SourceHanSansCN-Medium",
+    "PingFangSC-Medium", "Microsoft YaHei", system-ui, "-apple-system", Segoe UI,
+    Roboto, Emoji, Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1.35;
+  font-size: 24px;
+}
+#chapterInput {
+  width: 80px;
+  transition: all 0.3s;
+}
+#chapterInput:focus {
+  width: 100px;
+}
+#chapter-content {
+  margin-top: 0.8em;
+  white-space: pre-line;
+  word-break: break-all;
+  word-wrap: break-word;
+  color: rgba(0, 0, 0, 0.9);
+  font-family: "SourceHanSansSC-Regular", "SourceHanSansCN-Regular",
+    "PingFangSC-Regular", "Microsoft YaHei", system-ui, "-apple-system",
+    Segoe UI, Roboto, Emoji, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 2.4;
+}
+p {
+  text-indent: 2em;
+}
+p:first-child {
+  margin-top: 3em;
+}

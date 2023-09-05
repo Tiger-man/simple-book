@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本地电子书Text阅读器</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jschardet/3.0.0/jschardet.min.js"></script>
+  <script src="./helper/file.js"></script>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <div class="page">
+    <div class="opts">
+        <label for="fileInput">选择文件：
+          <input type="file" id="fileInput" />
+        </label>
+        <div class="opts-right">
+          <button id="nextChapter" onclick="getLatestChapter()">上一章</button>
+          <form onsubmit="getAimChapter()" style="display: inline;">
+            <input type="number" id="chapterInput" placeholder="输入章节" />
+          </form>
+          <button id="nextChapter" onclick="getNextChapter()">下一章</button>
+        </div>
+    </div>
+    <div class="chapter" id="chapter">
+      <div class="chapter-container">
+        <div id="chapter-title"></div>
+        <div id="chapter-content"></div>
+      </div>
+    </div>
+    <div class="footer">
+        <div id="percent">-</div>
+        <span id="current">- / -</span>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const fileContent = document.getElementById('fileContent');
+    const chapterTitle = document.getElementById("chapter-title")
+    const chapterContent = document.getElementById("chapter-content")
+    const chapterInput = document.getElementById("chapterInput")
+
+    fileInput.addEventListener('change', async (event) => {
+        const selectedFile = event.target.files[0];
+        await FileHelper.readFile(selectedFile)
+        const chapterList = await FileHelper.getChapterList()
+        this.getChapter()
+    });
+
+    function setChapter(chapter) {
+      document.getElementsByClassName('chapter')[0].scrollTop = 0
+      chapterTitle.innerHTML = chapter.title
+      chapterContent.innerHTML = chapter.chapterContent
+      chapterInput.value = chapter.chapterNumber
+      current.textContent = `${chapter.chapterNumber} / ${FileHelper.chapterList.length}`
+      percent.textContent = '0.00%'
+    }
+
+    function getChapter(){
+      console.log("i change")
+      const chapter = FileHelper.getChapter()
+      setChapter(chapter)
+    }
+
+    function getNextChapter(){
+      const chapter = FileHelper.getNextChapter()
+      setChapter(chapter)
+    }
+
+    function getLatestChapter(){
+      const chapter = FileHelper.getLatestChapter()
+      setChapter(chapter)
+    }
+
+    // 跳转到指定章节
+    function getAimChapter(){
+      const value = chapterInput.value
+      const chapter = FileHelper.getAimChapter(value)
+      setChapter(chapter)
+    }
+
+    const handleBoardEvent = e => {
+      const key = e.key
+      const nextKey = ['ArrowRight']
+      const latestKey = ['ArrowLeft']
+      if(nextKey.includes(key)) {
+        // 下一章
+        getNextChapter()
+      }else if(latestKey.includes(key)){
+        // 上一章
+        getLatestChapter()
+      }
+    }
+
+    window.addEventListener("keyup", handleBoardEvent)
+
+    chapter.addEventListener("scroll", ({ target }) => {
+      const { scrollTop, scrollHeight, offsetHeight } = target
+      const percentString = (scrollTop / (scrollHeight - offsetHeight) * 100).toFixed(2) + '%'
+      percent.textContent = percentString
+    })
+</script>
