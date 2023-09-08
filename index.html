@@ -23,7 +23,7 @@
           <button id="nextChapter" onclick="getNextChapter()">下一章</button>
         </div>
     </div>
-    <div class="chapter" id="chapter">
+    <div class="chapter" id="chapter" tabindex="0">
       <div class="chapter-container">
         <div id="chapter-title"></div>
         <div id="chapter-content"></div>
@@ -42,8 +42,7 @@
     const chapterTitle = document.getElementById("chapter-title")
     const chapterContent = document.getElementById("chapter-content")
     const chapterInput = document.getElementById("chapterInput")
-    const chapterBox = document.getElementsByClassName('chapter')[0]
-    const chapterContainerBox = document.getElementsByClassName('chapter-container')[0]
+    const chapterBox = document.getElementById('chapter')
 
     fileInput.addEventListener('change', async (event) => {
         const selectedFile = event.target.files[0];
@@ -58,8 +57,8 @@
       chapterInput.value = chapter.chapterNumber
       current.textContent = `${chapter.chapterNumber} / ${FileHelper.chapterList.length}`
       percent.textContent = '0.00%'
-      chapterBox.scrollTop = 0
       chapterInput.blur()
+      chapterBox.scrollTop = 0
       chapterBox.focus()
     }
 
@@ -102,11 +101,10 @@
 
     window.addEventListener("keyup", handleBoardEvent)
 
-    chapter.addEventListener("scroll", ({ target }) => {
+    chapterBox.addEventListener("scroll", ({ target }) => {
       const { scrollTop, scrollHeight, offsetHeight } = target
       const percentString = (scrollTop / (scrollHeight - offsetHeight) * 100).toFixed(2) + '%'
       percent.textContent = percentString
-
     })
 
 </script>

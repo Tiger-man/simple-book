@@ -40,10 +40,12 @@ body {
   background-color: #f5f1e8;
   position: relative;
   overflow-y: scroll;
+  outline: none;
 }
 .chapter-container {
   padding: 64px;
   position: absolute;
+  background-attachment: scroll;
 }
 #chapter-title {
   font-family: "SourceHanSansSC-Medium", "SourceHanSansCN-Medium",
