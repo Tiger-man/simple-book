@@ -56,6 +56,7 @@ const FileHelper = {
             chapterName: this.replaceNR(chapterName)
           })
         }
+        console.log(chapter)
         this.chapterList = chapter
         resolve(chapter)
       } catch (error) {
@@ -66,12 +67,15 @@ const FileHelper = {
   },
   // 获取章节内容
   getChapter() {
+    const { chapterList, fileContent } = this
     let chapterIndex = this.chapterIndex
     if (chapterIndex <= 1) {
-      this.chapterIndex = 1
       chapterIndex = 1
     }
-    const { chapterList, fileContent } = this
+    if (chapterIndex > chapterList.length) {
+      chapterIndex = chapterList.length
+    }
+    this.chapterIndex = chapterIndex
     if (!fileContent) {
       throw Error("未读取到文件信息")
     }
@@ -84,7 +88,7 @@ const FileHelper = {
       result.chapterName = chapter.chapterName
       result.chapterNumber = chapter.chapterNumber
       result.title = chapter.title
-      let chapterContent = fileContent.substring(chapter.endIndex, nextChapter.startIndex || undefined)
+      let chapterContent = fileContent.substring(chapter.endIndex, nextChapter?.startIndex)
 
       const regex = /([\s\S]+?)(?=\n|$)/g;
       const content = []
